@@ -6,11 +6,14 @@ const mongoose = require('mongoose');
 const multer = require('multer');
 const cors = require('cors');
 const { v4: uuidv4 } = require('uuid');
+const dotenv = require('dotenv');
 
 const feedRoutes = require('./routes/feed');
 const authRoutes = require('./routes/auth');
 
-const MONGODB_URI = 'mongodb+srv://NightmanCZ90:<password>@cluster0.a0hh5.mongodb.net/messages?retryWrites=true&w=majority'
+dotenv.config();
+
+const MONGODB_URI = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.a0hh5.mongodb.net/${process.env.MONGO_DEFAULT_DATABASE}?retryWrites=true&w=majority`
 
 const app = express();
 
@@ -52,7 +55,7 @@ app.use((error, req, res, next) => {
 mongoose.connect(MONGODB_URI)
   .then(result => {
     console.log('Connected!')
-    const server = app.listen(8080);
+    const server = app.listen(process.env.PORT || 3090)
     const io = require('./socket').init(server);
     io.on('connection', socket => {
       console.log('Client connected')
