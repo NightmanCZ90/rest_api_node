@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha --watch",
     "start": "node app.js",
     "start-server": "node app.js",
     "start:dev": "nodemon app.js"
@@ -27,6 +27,7 @@
   "devDependencies": {
     "chai": "^4.3.4",
     "mocha": "^9.1.4",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "sinon": "^12.0.1"
   }
 }
